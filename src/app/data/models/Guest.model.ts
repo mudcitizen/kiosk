@@ -1,4 +1,4 @@
-class Guest {
+export class Guest {
     pk: string;
     title: string;
     lastName: string;
