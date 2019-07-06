@@ -1,10 +1,16 @@
 export class Guest {
     pk: string;
-    title: string;
     lastName: string;
     firstName: string;
     phoneNumber: string;
     emailAddress: string;
+    company:string;
+    address:string;
+    city:string;
+    state:string;
+    zip:string;
+    country:string;
+
 
     get properName(): string {
         if (!this.lastName && !this.firstName)

@@ -1,5 +1,6 @@
 export class Reservation {
     pk: string;
+    guestPk:string;
     arrival: Date;
     depart: Date;
     level: string;
