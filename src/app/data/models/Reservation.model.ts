@@ -1,4 +1,4 @@
-class Reservation {
+export class Reservation {
     pk: string;
     arrival: Date;
     depart: Date;
