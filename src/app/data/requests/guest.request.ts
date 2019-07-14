@@ -1,5 +1,5 @@
 export class GuestRequest 
 {
-    id:string;
+    pk:string;
     name:string;
 }

@@ -1,6 +1,6 @@
 export class ReservationRequest 
 {
-    id:string;
+    pk:string;
     date:Date;
     name:string;
 }

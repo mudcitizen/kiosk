@@ -1,5 +1,6 @@
 export class Guest {
     pk: string;
+    title:string;
     lastName: string;
     firstName: string;
     phoneNumber: string;
