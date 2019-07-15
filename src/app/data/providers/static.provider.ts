@@ -523,7 +523,6 @@ export class StaticDataProvider implements IDataProvider {
         ]
 
     getGuests(request: GuestRequest): Observable<Guest[]> {
-        return null;
         let gs: Guest[] = this.guests.filter((g: Guest) => {
             if ((request.pk) && (g.pk === request.pk)) {
                 return true;
