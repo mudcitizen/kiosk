@@ -522,16 +522,14 @@ export class StaticDataProvider implements IDataProvider {
             }
         ]
 
-    getGuests(request: GuestRequest): Observable<Guest[]> {
+        getGuests(request: GuestRequest): Observable<Guest[]> {
         let gs: Guest[] = this.guests.filter((g: Guest) => {
             if ((request.pk) && (g.pk === request.pk)) {
                 return true;
             }
-
             if (request.name) 
             {
-                let name = g.lastName.toLowerCase();
-                return name.indexOf(request.name.toLowerCase()) >= 0; 
+                return g.lastName.toLowerCase().startsWith(request.name.toLowerCase()); 
             } 
             return false;
     });
