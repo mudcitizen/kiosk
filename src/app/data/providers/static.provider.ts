@@ -522,37 +522,41 @@ export class StaticDataProvider implements IDataProvider {
             }
         ]
 
-        constructor(testRowSource:ITestRowSource) {
-            if (testRowSource) {
-                this.guests = testRowSource.getGuests();
-                this.reservations = testRowSource.getReservations();
-            }
+    constructor(testRowSource: ITestRowSource) {
+        if (testRowSource) {
+            this.guests = testRowSource.getGuests();
+            this.reservations = testRowSource.getReservations();
         }
-        
-        getGuests(request: GuestRequest): Observable<Guest[]> {
+    }
+
+    getGuests(request: GuestRequest): Observable<Guest[]> {
         let gs: Guest[] = this.guests.filter((g: Guest) => {
             if ((request.pk) && (g.pk === request.pk)) {
                 return true;
             }
-            if (request.name) 
-            {
-                return g.lastName.toLowerCase().startsWith(request.name.toLowerCase()); 
-            } 
+            if (request.name) {
+                return g.lastName.toLowerCase().startsWith(request.name.toLowerCase());
+            }
             if ((request.emailAddress) && (g.emailAddress.toLowerCase() === request.emailAddress.toLowerCase())) {
                 return true;
             }
             if ((request.phoneNumber) && (g.phoneNumber === request.phoneNumber)) {
                 return true;
             }
-
             return false;
-    });
+        });
         return of(gs);
     }
 
-getReservations(request: ReservationRequest): Observable < Reservation[] > {
-    let reservations: Reservation[] = [];
-    return of(reservations);
-}
+    getReservations(request: ReservationRequest): Observable<Reservation[]> {
+        let rs: Reservation[] = this.reservations.filter((r: Reservation) => {
+            if ((request.pk) && (r.pk === request.pk))
+                return true;
+            if ((request.date) && (request.date >= r.arrival) && (request.date <= r.depart))
+                return true;
+            return false;
+        })
+        return of(rs);
+    }
 
 }
