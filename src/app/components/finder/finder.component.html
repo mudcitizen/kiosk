@@ -1,8 +1,9 @@
+<form novalidate (ngSubmit)="search()">
   <table>
     <tr>
       <td>Search Type:</td>
       <td>
-        <select [(ngModel)]="searchType">
+        <select [(ngModel)]="searchType" name="searchType">
           <option *ngFor="let st of searchTypes" value="{{st}}">{{st}}</option>
         </select>
       </td>
@@ -10,13 +11,14 @@
     <tr>
       <td>Search For:</td>
       <td>
-        <input [(ngModel)]="searchValue" required>
+        <input [(ngModel)]="searchValue" required name="searchValue">
       </td>
     </tr>
     <tr>
       <td></td>
       <td>
-        <button [disabled]="!searchValue" (click)="search()">Search</button>
+        <button [disabled]="!searchValue" type="submit">Search</button>
       </td>
     </tr>
   </table>
+</form>
