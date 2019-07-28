@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinderComponent implements OnInit {
 
-  constructor() { }
+  protected readonly nameSearchType:string = "Name";
+  protected readonly emailSearchType:string = "Email";
+  protected readonly phoneSearchType:string = "Phone #";
+  protected readonly pkSearchType:string = "Reservation #:"
+  readonly searchTypes:String[] = [this.nameSearchType,this.pkSearchType,this.emailSearchType,this.phoneSearchType];
 
+  searchType:string; // = this.nameSearchType;
+  searchValue:string;
+  
   ngOnInit() {
+  }
+
+  search() : void {
+    console.log(`FinderComponent.Search() : Type - ${this.searchType} ; Value - ${this.searchValue}`);
   }
 
 }
