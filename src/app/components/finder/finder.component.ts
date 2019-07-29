@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Inject } from '@angular/core';
+import { IDataProvider } from "../../data/providers/idata.provider";
+import {Injection_Token_DataProvider} from "../../common/constants";
 @Component({
   selector: 'app-finder',
   templateUrl: './finder.component.html',
   styleUrls: ['./finder.component.css']
 })
+
 export class FinderComponent implements OnInit {
 
-  protected readonly nameSearchType:string = "Name";
-  protected readonly emailSearchType:string = "Email";
-  protected readonly phoneSearchType:string = "Phone #";
-  protected readonly pkSearchType:string = "Reservation #:"
+  private readonly nameSearchType:string = "Name";
+  private readonly emailSearchType:string = "Email";
+  private readonly phoneSearchType:string = "Phone #";
+  private readonly pkSearchType:string = "Reservation #:"
   readonly searchTypes:String[] = [this.nameSearchType,this.pkSearchType,this.emailSearchType,this.phoneSearchType];
 
   searchType:string; // = this.nameSearchType;
   searchValue:string;
   
+  constructor(@Inject(Injection_Token_DataProvider) private dataProvider:IDataProvider) {}
+
   ngOnInit() {
   }
 
