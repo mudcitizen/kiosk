@@ -522,7 +522,7 @@ export class StaticDataProvider implements IDataProvider {
             }
         ]
 
-    constructor(testRowSource: ITestRowSource) {
+    constructor(testRowSource?: ITestRowSource) {
         if (testRowSource) {
             this.guests = testRowSource.getGuests();
             this.reservations = testRowSource.getReservations();

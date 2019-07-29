@@ -22,7 +22,7 @@ import { Injection_Token_DataProvider} from "./common/constants"
     AppRoutingModule,
     FormsModule
   ],
-  providers: [{ provide: Injection_Token_DataProvider, useValue :new StaticDataProvider(null)}],
+  providers: [{ provide: Injection_Token_DataProvider, useValue :new StaticDataProvider()}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
