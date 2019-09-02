@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { IDataProvider } from "../../data/providers/idata.provider";
 import {Injection_Token_DataProvider} from "../../common/constants";
+import { DataService } from 'src/app/data/service/data.service';
 @Component({
   selector: 'app-finder',
   templateUrl: './finder.component.html',
@@ -18,7 +19,7 @@ export class FinderComponent implements OnInit {
   searchType:string; // = this.nameSearchType;
   searchValue:string;
   
-  constructor(@Inject(Injection_Token_DataProvider) private dataProvider:IDataProvider) {}
+  constructor(@Inject(Injection_Token_DataProvider) private dataProvider:IDataProvider, private dataServer:DataService) {}
 
   ngOnInit() {
   }
