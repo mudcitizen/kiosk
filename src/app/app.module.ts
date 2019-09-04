@@ -9,6 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import {StaticDataProvider} from "./data/providers/static.provider"
 import { Injection_Token_DataProvider} from "./common/constants"
+import { DataService } from './data/service/data.service';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { Injection_Token_DataProvider} from "./common/constants"
     AppRoutingModule,
     FormsModule
   ],
-  providers: [{ provide: Injection_Token_DataProvider, useValue :new StaticDataProvider()}],
+  providers: [{ provide: Injection_Token_DataProvider, useValue :new StaticDataProvider()},
+  {provide: DataService, useClass: DataService}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

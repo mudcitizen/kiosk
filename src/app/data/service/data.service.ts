@@ -9,8 +9,8 @@ export class DataService {
 
   protected theGuest:Guest;
   protected theReservation:Reservation
+  
   constructor() { 
-    console.log("Hello from DataService.construtor")
   }
 
   public getGuest() : Guest {
