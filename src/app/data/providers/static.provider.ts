@@ -530,17 +530,27 @@ export class StaticDataProvider implements IDataProvider {
     }
 
     getGuests(request: GuestRequest): Observable<Guest[]> {
+        if (request.emailAddress) {
+            request.emailAddress = this.scrubString(request.emailAddress);
+        }
+        if (request.phoneNumber) {
+            request.phoneNumber = this.scrubString(request.phoneNumber);
+        }
+        if (request.name) {
+            request.name = this.scrubString(request.name);
+        }
+
         let gs: Guest[] = this.guests.filter((g: Guest) => {
             if ((request.pk) && (g.pk === request.pk)) {
                 return true;
             }
             if ((request.name) && (g.lastName)) {
-                return g.lastName.toLowerCase().startsWith(request.name.toLowerCase());
+                return this.scrubString(g.lastName).startsWith(request.name);
             }
-            if ((request.emailAddress) && (g.emailAddress) && (g.emailAddress.toLowerCase() === request.emailAddress.toLowerCase())) {
+            if ((request.emailAddress) && (g.emailAddress) && (this.scrubString(g.emailAddress).startsWith(request.emailAddress))) {
                 return true;
             }
-            if ((request.phoneNumber) && (g.phoneNumber) && (g.phoneNumber === request.phoneNumber)) {
+            if ((request.phoneNumber) && (g.phoneNumber) && (this.scrubString(g.phoneNumber).startsWith(request.phoneNumber))) {
                 return true;
             }
             return false;
@@ -557,6 +567,10 @@ export class StaticDataProvider implements IDataProvider {
             return false;
         })
         return of(rs);
+    }
+
+    private scrubString(value:string) : string {
+          return value.trim().toLowerCase();
     }
 
 }
