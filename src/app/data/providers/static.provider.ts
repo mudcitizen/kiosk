@@ -534,13 +534,13 @@ export class StaticDataProvider implements IDataProvider {
             if ((request.pk) && (g.pk === request.pk)) {
                 return true;
             }
-            if (request.name) {
+            if ((request.name) && (g.lastName)) {
                 return g.lastName.toLowerCase().startsWith(request.name.toLowerCase());
             }
-            if ((request.emailAddress) && (g.emailAddress.toLowerCase() === request.emailAddress.toLowerCase())) {
+            if ((request.emailAddress) && (g.emailAddress) && (g.emailAddress.toLowerCase() === request.emailAddress.toLowerCase())) {
                 return true;
             }
-            if ((request.phoneNumber) && (g.phoneNumber === request.phoneNumber)) {
+            if ((request.phoneNumber) && (g.phoneNumber) && (g.phoneNumber === request.phoneNumber)) {
                 return true;
             }
             return false;

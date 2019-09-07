@@ -90,6 +90,98 @@ describe("StaticDataProvider - Guests", () => {
         }
         )   // subscribe
     })     // it
+
+    it("should handle null name", () => {
+        let expectedName:string = 'Schlub';
+        let rows:ITestRowSource = {
+            getGuests(): Guest[] {
+
+                let gs:Guest[] = new Array<Guest>();
+
+                let g:Guest = new Guest();
+                g.lastName = null;
+                gs.push(g);
+
+                g = new Guest();
+                g.lastName = expectedName;
+                gs.push(g);
+                gs.forEach((g:Guest) => {
+                    g.emailAddress = null;
+                    g.phoneNumber = null;
+                })
+
+                return gs;
+            },
+            getReservations():Reservation[] {return null;}
+        }
+        let dp: StaticDataProvider = new StaticDataProvider(rows);
+        let req = new GuestRequest();
+        req.name = expectedName.slice(0,expectedName.length-2);
+        dp.getGuests(req).subscribe((data: Guest[]) => {
+            expect(data.length).toEqual(1);
+        }
+        )   // subscribe
+    })     // it
+    it("should handle null email", () => {
+        let rows:ITestRowSource = {
+            getGuests(): Guest[] {
+
+                let gs:Guest[] = new Array<Guest>();
+
+                let g:Guest = new Guest();
+                g.emailAddress = null;
+                gs.push(g);
+
+                g = new Guest();
+                g.emailAddress = expectedEmailAddress;
+                gs.push(g);
+                gs.forEach((g:Guest) => {
+                    g.firstName = 'Joe';
+                    g.lastName='Schlub'
+                })
+
+                return gs;
+            },
+            getReservations():Reservation[] {return null;}
+        }
+        let dp: StaticDataProvider = new StaticDataProvider(rows);
+        let req = new GuestRequest();
+        req.emailAddress = expectedEmailAddress;
+        dp.getGuests(req).subscribe((data: Guest[]) => {
+            expect(data.length).toEqual(1);
+        }
+        )   // subscribe
+    })     // it
+    it("should handle null phone", () => {
+        let rows:ITestRowSource = {
+            getGuests(): Guest[] {
+
+                let gs:Guest[] = new Array<Guest>();
+
+                let g:Guest = new Guest();
+                g.phoneNumber = null;
+                gs.push(g);
+
+                g = new Guest();
+                g.phoneNumber = expectedPhoneNumber;
+                gs.push(g);
+                gs.forEach((g:Guest) => {
+                    g.firstName = 'Joe';
+                    g.lastName='Schlub'
+                })
+
+                return gs;
+            },
+            getReservations():Reservation[] {return null;}
+        }
+        let dp: StaticDataProvider = new StaticDataProvider(rows);
+        let req = new GuestRequest();
+        req.phoneNumber = expectedPhoneNumber;
+        dp.getGuests(req).subscribe((data: Guest[]) => {
+            expect(data.length).toEqual(1);
+        }
+        )   // subscribe
+    })     // it
 })
 
 describe("StaticDataProvider - Reservations ",() => {
