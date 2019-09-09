@@ -1,3 +1,12 @@
-<p>
-  guests works!
-</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  <tr *ngFor="let guest of guests">
+    <td>{{guest.firstName + " " + guest.lastName}}</td>
+    <td>{{guest.emailAddress}}</td>
+    <td>{{guest.phoneNumber}}</td>
+  </tr>
+</table>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/data/service/data.service';
+import { Guest } from 'src/app/data/models/guest.model';
 
 @Component({
   selector: 'app-guests',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestsComponent implements OnInit {
 
-  constructor() { }
+  guests:Guest[];
+
+  constructor(private dataSerivce:DataService) {
+    this.guests = dataSerivce.getGuests();
+   }
 
   ngOnInit() {
   }
