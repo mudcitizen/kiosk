@@ -1,5 +1,5 @@
 import { GuestRequest } from '../requests/guest.request'
-import { Guest } from '../models/guest.model';
+import { GuestData } from '../models/guest.data';
 import { ReservationRequest } from '../requests/reservation.request'
 import { Reservation } from '../models/reservation.model';
 import { Observable, fromEventPattern } from "rxjs";
@@ -8,7 +8,7 @@ import { Injection_Token_DataProvider} from "../../common/constants"
 
 
 export interface IDataProvider {
-    getGuests(GuestRequest) : Observable<Guest[]>;   
+    getGuests(GuestRequest) : Observable<GuestData[]>;   
     getReservations(ReservationRequest) : Observable<Reservation[]>;   
 }
 

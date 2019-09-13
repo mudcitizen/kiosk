@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { IDataProvider } from "../../data/providers/idata.provider";
 import { Injection_Token_DataProvider } from "../../common/constants";
 import { DataService } from 'src/app/data/service/data.service';
-import { Guest } from 'src/app/data/models/Guest.model';
 import { ReservationRequest } from 'src/app/data/requests/reservation.request';
 import { Reservation } from 'src/app/data/models/reservation.model';
 import { GuestRequest } from 'src/app/data/requests/guest.request';
 import { Router } from '@angular/router';
+import { GuestData } from 'src/app/data/models/guest.data';
 @Component({
   selector: 'app-finder',
   templateUrl: './finder.component.html',
@@ -65,7 +65,7 @@ export class FinderComponent implements OnInit {
           break;
       }
 
-      this.dataProvider.getGuests(request).subscribe((data: Guest[]) => {
+      this.dataProvider.getGuests(request).subscribe((data: GuestData[]) => {
         switch (data.length) {
           case 0:
             // TODO Handle Guest Not Found

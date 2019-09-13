@@ -1,6 +1,6 @@
-import { Guest } from "../models/Guest.model";
+import { GuestData } from "../models/Guest.data";
 import {Reservation } from "../models/Reservation.model";
 export interface ITestRowSource {
-    getGuests() : Guest[];
+    getGuests() : GuestData[];
     getReservations() : Reservation[]
 }

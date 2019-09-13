@@ -1,5 +1,5 @@
 import { StaticDataProvider } from "./static.provider";
-import { Guest } from "../models/Guest.model";
+import { GuestData } from "../models/Guest.data";
 import { GuestRequest } from "../requests/guest.request";
 import { Observable } from "rxjs";
 import { ITestRowSource } from "../providers/ITestRowSource";
@@ -17,35 +17,35 @@ const expectedDate = new Date(expectedDateYear, expectedDateMonth, expectedDateD
 
 describe("StaticDataProvider - Guests", () => {
 
-    it("should find Guest # 10000I", () => {
+    it("should find GuestData # 10000I", () => {
         let dp: StaticDataProvider = new StaticDataProvider(null);
         const expectedPk: string = "10000I";
         let req = new GuestRequest();
         req.pk = expectedPk;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
             expect(data[0].pk).toEqual(expectedPk);
         }
         )   // subscribe
     })     // it
 
-    it("should not find Guest # 123456", () => {
+    it("should not find GuestData # 123456", () => {
         let dp: StaticDataProvider = new StaticDataProvider(null);
         const expectedPk: string = "123456";
         let req = new GuestRequest();
         req.pk = expectedPk;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(0);
         }
         )   // subscribe
     })     // it
 
-    it("should find Guest Name Alvar", () => {
+    it("should find GuestData Name Alvar", () => {
         let dp: StaticDataProvider = new StaticDataProvider(null);
         const expectedName: string = "alvar";
         let req = new GuestRequest();
         req.name = expectedName;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
             expect(data[0].lastName.toLowerCase().startsWith(expectedName)).toEqual(true);
         }
@@ -56,7 +56,7 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(new EMailAddressTestRowSource());
         let req = new GuestRequest();
         req.emailAddress = expectedEmailAddress;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
         }
         )   // subscribe
@@ -66,7 +66,7 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(new EMailAddressTestRowSource());
         let req = new GuestRequest();
         req.emailAddress = expectedEmailAddress.replace("mud", "mad");
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(0);
         }
         )   // subscribe
@@ -75,7 +75,7 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(new PhoneNumberTestRowSource());
         let req = new GuestRequest();
         req.phoneNumber = expectedPhoneNumber;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
         }
         )   // subscribe
@@ -85,7 +85,7 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(new PhoneNumberTestRowSource());
         let req = new GuestRequest();
         req.phoneNumber = expectedPhoneNumber.replace("8", "9");
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(0);
         }
         )   // subscribe
@@ -94,18 +94,18 @@ describe("StaticDataProvider - Guests", () => {
     it("should handle null name", () => {
         let expectedName:string = 'Schlub';
         let rows:ITestRowSource = {
-            getGuests(): Guest[] {
+            getGuests(): GuestData[] {
 
-                let gs:Guest[] = new Array<Guest>();
+                let gs:GuestData[] = new Array<GuestData>();
 
-                let g:Guest = new Guest();
+                let g:GuestData = new GuestData();
                 g.lastName = null;
                 gs.push(g);
 
-                g = new Guest();
+                g = new GuestData();
                 g.lastName = expectedName;
                 gs.push(g);
-                gs.forEach((g:Guest) => {
+                gs.forEach((g:GuestData) => {
                     g.emailAddress = null;
                     g.phoneNumber = null;
                 })
@@ -117,25 +117,25 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(rows);
         let req = new GuestRequest();
         req.name = expectedName.slice(0,expectedName.length-2);
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
         }
         )   // subscribe
     })     // it
     it("should handle null email", () => {
         let rows:ITestRowSource = {
-            getGuests(): Guest[] {
+            getGuests(): GuestData[] {
 
-                let gs:Guest[] = new Array<Guest>();
+                let gs:GuestData[] = new Array<GuestData>();
 
-                let g:Guest = new Guest();
+                let g:GuestData = new GuestData();
                 g.emailAddress = null;
                 gs.push(g);
 
-                g = new Guest();
+                g = new GuestData();
                 g.emailAddress = expectedEmailAddress;
                 gs.push(g);
-                gs.forEach((g:Guest) => {
+                gs.forEach((g:GuestData) => {
                     g.firstName = 'Joe';
                     g.lastName='Schlub'
                 })
@@ -147,25 +147,25 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(rows);
         let req = new GuestRequest();
         req.emailAddress = expectedEmailAddress;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
         }
         )   // subscribe
     })     // it
     it("should handle null phone", () => {
         let rows:ITestRowSource = {
-            getGuests(): Guest[] {
+            getGuests(): GuestData[] {
 
-                let gs:Guest[] = new Array<Guest>();
+                let gs:GuestData[] = new Array<GuestData>();
 
-                let g:Guest = new Guest();
+                let g:GuestData = new GuestData();
                 g.phoneNumber = null;
                 gs.push(g);
 
-                g = new Guest();
+                g = new GuestData();
                 g.phoneNumber = expectedPhoneNumber;
                 gs.push(g);
-                gs.forEach((g:Guest) => {
+                gs.forEach((g:GuestData) => {
                     g.firstName = 'Joe';
                     g.lastName='Schlub'
                 })
@@ -177,7 +177,7 @@ describe("StaticDataProvider - Guests", () => {
         let dp: StaticDataProvider = new StaticDataProvider(rows);
         let req = new GuestRequest();
         req.phoneNumber = expectedPhoneNumber;
-        dp.getGuests(req).subscribe((data: Guest[]) => {
+        dp.getGuests(req).subscribe((data: GuestData[]) => {
             expect(data.length).toEqual(1);
         }
         )   // subscribe
@@ -190,8 +190,8 @@ describe("StaticDataProvider - Reservations ",() => {
 
         let rows: ITestRowSource = {
 
-            getGuests(): Guest[] {
-                let gs: Array<Guest> = []
+            getGuests(): GuestData[] {
+                let gs: Array<GuestData> = []
                 return gs;
             },
 
@@ -233,8 +233,8 @@ describe("StaticDataProvider - Reservations ",() => {
 
         let rows: ITestRowSource = {
 
-            getGuests(): Guest[] {
-                let gs: Array<Guest> = []
+            getGuests(): GuestData[] {
+                let gs: Array<GuestData> = []
                 return gs;
             },
 
@@ -276,8 +276,8 @@ describe("StaticDataProvider - Reservations ",() => {
 
         let rows: ITestRowSource = {
 
-            getGuests(): Guest[] {
-                let gs: Array<Guest> = []
+            getGuests(): GuestData[] {
+                let gs: Array<GuestData> = []
                 return gs;
             },
 
@@ -318,8 +318,8 @@ describe("StaticDataProvider - Reservations ",() => {
 
         let rows: ITestRowSource = {
 
-            getGuests(): Guest[] {
-                let gs: Array<Guest> = []
+            getGuests(): GuestData[] {
+                let gs: Array<GuestData> = []
                 return gs;
             },
 
@@ -358,8 +358,8 @@ describe("StaticDataProvider - Reservations ",() => {
     it("should find res with pk", () => {
         let rows: ITestRowSource = {
 
-            getGuests(): Guest[] {
-                let gs: Array<Guest> = []
+            getGuests(): GuestData[] {
+                let gs: Array<GuestData> = []
                 return gs;
             },
 
@@ -400,8 +400,8 @@ describe("StaticDataProvider - Reservations ",() => {
     it("should not find res with pk", () => {
         let rows: ITestRowSource = {
 
-            getGuests(): Guest[] {
-                let gs: Array<Guest> = []
+            getGuests(): GuestData[] {
+                let gs: Array<GuestData> = []
                 return gs;
             },
 
@@ -442,9 +442,9 @@ describe("StaticDataProvider - Reservations ",() => {
 
 class EMailAddressTestRowSource implements ITestRowSource {
     getGuests() {
-        let g: Guest = new Guest();
+        let g: GuestData = new GuestData();
         g.emailAddress = expectedEmailAddress
-        let gs: Array<Guest> = [g];
+        let gs: Array<GuestData> = [g];
         return gs;
     }
     getReservations() {
@@ -456,9 +456,9 @@ class EMailAddressTestRowSource implements ITestRowSource {
 
 class PhoneNumberTestRowSource implements ITestRowSource {
     getGuests() {
-        let g: Guest = new Guest();
+        let g: GuestData = new GuestData();
         g.phoneNumber = expectedPhoneNumber;
-        let gs: Array<Guest> = [g];
+        let gs: Array<GuestData> = [g];
         return gs;
     }
     getReservations() {
