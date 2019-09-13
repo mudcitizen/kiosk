@@ -12,6 +12,20 @@ export class Guest {
     zip:string;
     country:string;
 
+    constructor() {
+        this.pk = "";
+        this.title="";
+        this.lastName= "" ;
+        this.firstName ="";
+        this.phoneNumber ="";
+        this.emailAddress ="";
+        this.company="";
+        this.address="";
+        this.city="";
+        this.state="";
+        this.zip="";
+        this.country="";
+    }
 
     get properName(): string {
         if (!this.lastName && !this.firstName)
@@ -24,4 +38,5 @@ export class Guest {
             name = name + " " + this.lastName.trim();
         return name;
     }
+
 }
