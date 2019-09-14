@@ -1,12 +1,16 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Address</th>
     <th>Email</th>
     <th>Phone</th>
   </tr>
   <tr *ngFor="let guest of guests">
     <td>{{guest.properName}}</td>
+    <td>{{guest.fullAddress}}</td>
     <td>{{guest.emailAddress}}</td>
     <td>{{guest.phoneNumber}}</td>
+    <button>Update Contact</button>
+    <button>Reservation(s)</button>
   </tr>
 </table>
