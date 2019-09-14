@@ -1,3 +1,5 @@
+import { stringify } from "@angular/core/src/render3/util";
+
 export class Guest {
     pk: string;
     title:string;
@@ -37,6 +39,13 @@ export class Guest {
             if (this.lastName)
             name = name + " " + this.lastName.trim();
         return name;
+    }
+
+    get fullAddress():string {
+
+        let addr: string = `${this.address} ${this.city} ${this.state} ${this.zip} ${this.country}`;
+        addr = addr.trim();
+        return addr.replace("  "," ");
     }
 
 }
